@@ -9,4 +9,4 @@ app.get("/",(req,res)=>{
 })
 
 app.listen( PORT)
-console.log(` Puerto ${PORT} esta corriendo`);
+console.log(` 🚀 Puerto ${PORT} esta corriendo 🚀`);
