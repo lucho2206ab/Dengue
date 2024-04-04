@@ -4,6 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver Lista</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    
+    .table th,
+    .table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+    
+    .table th {
+        background-color: #333;
+        color: #fff;
+    }
+    
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    
+    .table tr:hover {
+        background-color: #ddd;
+    }   
+    .home{
+        margin-top: 20px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        position: relative;
+        top: -380px;
+        left: 700px;
+    }
+    
+    a:hover {
+        background-color: #0056b3;
+    }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -34,7 +92,7 @@
                 <% }); %>
             </tbody>
         </table>
-        <a href="./">home</a>
+        <a  class="home" href="./">home</a>
     </div>
 </body>
 </html>
