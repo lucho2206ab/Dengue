@@ -1,5 +1,4 @@
 import {Router} from 'express'
-import pool from '../database.js'
 import {deletePersona,createPersona,getPersona,getPersonaId,updatePersona} from 
 '../controles/controlles.js'
 
@@ -20,4 +19,5 @@ router.get('/edit/:id',getPersonaId )
 router.post('/edit/:id', updatePersona)
 
 router.get('/delete/:id', deletePersona);
+
 export default router;

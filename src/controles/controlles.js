@@ -46,10 +46,10 @@ export const createPersona = async(req, res)=>{
 
 export const updatePersona = async(req, res)=>{
     try{
-        const {name, lastname, age} = req.body;
-        const {id} = req.params;
-        const editPersona = {name, lastname, age};
-        await pool.query('UPDATE personas SET ? WHERE id = ?', [editPersona, id]);
+        const {name, lastname, age, barrio, calle, casa, dengue } = req.body;
+        const {DNi} = req.params;
+        const editPersona = {name, lastname, age, barrio, calle, casa, dengue};
+        await pool.query('UPDATE personas SET ? WHERE id = ?', [editPersona, DNI]);
         res.redirect('/list');
     }
     catch(err){
@@ -59,8 +59,8 @@ export const updatePersona = async(req, res)=>{
 
 export const deletePersona = async(req, res)=>{
     try{
-        const {id} = req.params;
-        await pool.query('DELETE FROM personas WHERE id = ?', [id]);
+        const {DNI} = req.params;
+        await pool.query('DELETE FROM personas WHERE id = ?', [DNI]);
         res.redirect('/list');
     }
     catch(err){
