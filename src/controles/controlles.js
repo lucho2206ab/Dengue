@@ -12,8 +12,8 @@ export const getPersona = async(req, res)=>{
 
 export const getPersonaId = async(req, res)=>{
     try{
-        const {id} = req.params;
-        const [persona] = await pool.query('SELECT * FROM personas WHERE id = ?', [id]);
+        const {DNI} = req.params;
+        const [persona] = await pool.query('SELECT * FROM personas WHERE id = ?', [DNI]);
         const personaEdit = persona[0];
         res.render('personas/edit', {persona: personaEdit});
     }
