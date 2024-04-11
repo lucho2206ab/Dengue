@@ -3,70 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Lista</title>
-    <style>body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-    
-    h2 {
-        color: #333;
-        margin-bottom: 20px;
-    }
-    
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-    
-    .table th,
-    .table td {
-        padding: 10px;
-        border: 1px solid #ddd;
-    }
-    
-    .table th {
-        background-color: #333;
-        color: #fff;
-    }
-    
-    .table tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-    
-    .table tr:hover {
-        background-color: #ddd;
-    }   
-    .home{
-        margin-top: 20px;
-        text-decoration: none;
-        color: #fff;
-        background-color: #007bff;
-        padding: 10px 20px;
-        border-radius: 5px;
-        position: relative;
-        top: -380px;
-        left: 700px;
-    }
-    
-    a:hover {
-        background-color: #0056b3;
-    }
+    <title>Lista de Personas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto; /* Centrar el contenedor */
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .search-container {
+            margin-bottom: 20px; /* Espacio entre el campo de búsqueda y la tabla */
+        }
+
+        .search-container input[type="text"],
+        .search-container button {
+            margin-right: 10px; /* Espacio entre el campo de texto y el botón de búsqueda */
+        }
+
+        .home {
+            margin-top: 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            position: relative;
+            top: -37px;
+            left: 717px;
+        }
+        .home:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Registro de Personas</h2>
-        <table class="table text-center" id="table">
+    <div class="container"> 
+        <h2>Lista de Personas</h2>
+
+        <div class="search-container">
+            <form action="/buscar" method="post">
+                <input type="text" name="termino" placeholder="Buscar...">
+                <button type="submit" class="btn">Buscar</button>
+            </form>
+        </div>
+
+        <a class="home" href="/">Home</a> <!-- Enlace a la página de inicio -->
+
+        <table class="table text-center">
             <thead>
                 <tr class="table-dark">
                     <th scope="col">Nombre</th>
@@ -76,6 +110,7 @@
                     <th scope="col">Calle</th>
                     <th scope="col">Casa</th>
                     <th scope="col">Dengue</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,11 +123,17 @@
                         <td><%= persona.calle %></td>
                         <td><%= persona.casa %></td>
                         <td><%= persona.dengue %></td>
+                        <td>
+                            <div>
+                                <form action="/delete/<%= persona.ID %>" method="GET">
+                                    <button type="submit">Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 <% }); %>
             </tbody>
         </table>
-        <a  class="home" href="./">home</a>
     </div>
 </body>
 </html>

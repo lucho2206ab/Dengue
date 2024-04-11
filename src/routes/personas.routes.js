@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {deletePersona,createPersona,getPersona,getPersonaId,updatePersona} from 
+import {deletePersona,createPersona,getPersona,getPersonaId,updatePersona,buscarPersona} from 
 '../controles/controlles.js'
 
 
@@ -14,10 +14,14 @@ router.post('/create', createPersona  );
 
 router.get('/list',getPersona );
 
-router.get('/edit/:id',getPersonaId )
+router.get('/edit/:ID',getPersonaId )
 
-router.post('/edit/:id', updatePersona)
+router.post('/edit/:ID', updatePersona)
 
-router.get('/delete/:id', deletePersona);
+router.get('/delete/:ID', deletePersona);
+
+router.post('/buscar', buscarPersona);
+
+
 
 export default router;

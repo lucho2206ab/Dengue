@@ -10,10 +10,31 @@ export const getPersona = async(req, res)=>{
     }
 }
 
+export const buscarPersona = async (req, res) => {
+    try {
+        
+        const { termino } = req.body;
+        // Ejecutar la consulta SQL con el término de búsqueda en cada columna
+        const [result] = await pool.query(`
+        SELECT * FROM personas 
+        WHERE name LIKE ? 
+        OR lastname LIKE ? 
+        OR age LIKE ? 
+        OR barrio LIKE ? 
+        OR calle LIKE ? 
+        OR casa LIKE ? 
+        OR dengue LIKE ?
+    `, [`%${termino}%`, `%${termino}%`, `%${termino}%`, `%${termino}%`, `%${termino}%`, `%${termino}%`, `%${termino}%`]);
+        res.render('list', { personas: result });
+    } catch (error) {
+        // Manejar cualquier error que ocurra durante la búsqueda
+        res.status(500).json({ message: error.message });
+    }
+};
 export const getPersonaId = async(req, res)=>{
     try{
-        const {DNI} = req.params;
-        const [persona] = await pool.query('SELECT * FROM personas WHERE id = ?', [DNI]);
+        const {ID} = req.params;
+        const [persona] = await pool.query('SELECT * FROM personas WHERE ID = ?', [ID]);
         const personaEdit = persona[0];
         res.render('personas/edit', {persona: personaEdit});
     }
@@ -24,10 +45,9 @@ export const getPersonaId = async(req, res)=>{
 
 export const createPersona = async(req, res)=>{
     try{
-        const {dni, nombre, apellido, age, barrio, calle, casa, dengue} = req.body;
+        const {nombre, apellido, age, barrio, calle, casa, dengue} = req.body;
         
         const newPersona = {
-            DNI:dni,
             name:nombre,
             lastname:apellido, 
             age, 
@@ -47,9 +67,9 @@ export const createPersona = async(req, res)=>{
 export const updatePersona = async(req, res)=>{
     try{
         const {name, lastname, age, barrio, calle, casa, dengue } = req.body;
-        const {DNi} = req.params;
+        const {ID} = req.params;
         const editPersona = {name, lastname, age, barrio, calle, casa, dengue};
-        await pool.query('UPDATE personas SET ? WHERE id = ?', [editPersona, DNI]);
+        await pool.query('UPDATE personas SET ? WHERE id = ?', [editPersona, ID]);
         res.redirect('/list');
     }
     catch(err){
@@ -59,8 +79,9 @@ export const updatePersona = async(req, res)=>{
 
 export const deletePersona = async(req, res)=>{
     try{
-        const {DNI} = req.params;
-        await pool.query('DELETE FROM personas WHERE id = ?', [DNI]);
+        const {ID} = req.params;
+        console.log(ID)
+        await pool.query('DELETE FROM personas WHERE ID = ?', [ID]);
         res.redirect('/list');
     }
     catch(err){
