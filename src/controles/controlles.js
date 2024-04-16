@@ -31,12 +31,14 @@ export const buscarPersona = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
 export const getPersonaId = async(req, res)=>{
     try{
         const {ID} = req.params;
         const [persona] = await pool.query('SELECT * FROM personas WHERE ID = ?', [ID]);
+        console.log(persona)
         const personaEdit = persona[0];
-        res.render('personas/edit', {persona: personaEdit});
+        res.render('edit', {persona: personaEdit});
     }
     catch(err){
         res.status(500).json({message:err.message});
@@ -66,9 +68,9 @@ export const createPersona = async(req, res)=>{
 
 export const updatePersona = async(req, res)=>{
     try{
-        const {name, lastname, age, barrio, calle, casa, dengue } = req.body;
+        const {nombre, apellido, Edad, barrio, calle, casa, dengue } = req.body;
         const {ID} = req.params;
-        const editPersona = {name, lastname, age, barrio, calle, casa, dengue};
+        const editPersona = {name:nombre, lastname:apellido, age:Edad, barrio, calle, casa, dengue};
         await pool.query('UPDATE personas SET ? WHERE id = ?', [editPersona, ID]);
         res.redirect('/list');
     }
